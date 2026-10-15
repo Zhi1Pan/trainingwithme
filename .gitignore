@@ -1,0 +1,6 @@
+site/
+*.log
+*.err
+.dev-server.pid
+.mkdocs-serve.pid
+__pycache__/

@@ -1,0 +1,39 @@
+site_name: 导盲犬训练师
+site_description: 浙江大学《动物行为科学》课程作业——通过互动模拟体验导盲犬训练中的行为科学原理
+site_url: ""
+
+theme:
+  name: material
+  language: zh
+  palette:
+    scheme: default
+    primary: brown
+    accent: amber
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - search.suggest
+    - search.highlight
+
+nav:
+  - 首页: index.md
+  - 科学背景: background.md
+  - 第一关 · 学会停下: level1.md
+  - 第二关 · 适应复杂环境: level2.md
+  - 第三关 · 安全优先: level3.md
+  - 训练总结: summary.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - attr_list
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/trainer.js
+
+copyright: 浙江大学《动物行为科学》课程作业 · 互动教学模拟
