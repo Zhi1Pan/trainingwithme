@@ -640,7 +640,6 @@
       '<p class="gdt-dog-mood"><span class="gdt-dot mood-' + mood + '"></span>' + MOOD_TEXT[mood] + '</p>' +
       '</div>' +
       '<div class="gdt-meters">' +
-      meterHtml('学习进度', p.dog.progress, 'gdt-meter-progress') +
       meterHtml('动机', p.dog.motivation, 'gdt-meter-motive') +
       meterHtml('压力', p.dog.stress, stressCls) +
       '</div>' +
