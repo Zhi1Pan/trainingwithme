@@ -18,7 +18,6 @@ theme:
 
 nav:
   - 首页: index.md
-  - 科学背景: background.md
   - 第一关 · 学会停下: level1.md
   - 第二关 · 适应复杂环境: level2.md
   - 第三关 · 安全优先: level3.md
