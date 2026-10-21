@@ -333,8 +333,8 @@
 
 .gdt-meter-progress { background: linear-gradient(90deg, #e8a13c, #f0c46a); }
 .gdt-meter-motive { background: linear-gradient(90deg, #7d9b76, #a9c69f); }
-.gdt-meter-stress-low { background: linear-gradient(90deg, #7d9b76, #a9c69f); }
-.gdt-meter-stress-mid { background: linear-gradient(90deg, #e0b45c, #ecca8b); }
+.gdt-meter-stress-low { background: linear-gradient(90deg, #c05f4d, #d98a72); }
+.gdt-meter-stress-mid { background: linear-gradient(90deg, #c05f4d, #d98a72); }
 .gdt-meter-stress-high { background: linear-gradient(90deg, #c05f4d, #d98a72); }
 
 .gdt-meter-value {

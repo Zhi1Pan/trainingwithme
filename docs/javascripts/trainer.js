@@ -538,6 +538,36 @@
     save();
   }
 
+  function hasAnyProgress() {
+    var nums = [1, 2, 3];
+    for (var i = 0; i < nums.length; i++) {
+      if (state.records[nums[i]] || state.progress[nums[i]]) return true;
+    }
+    return false;
+  }
+
+  function bindHomeGuard() {
+    var logo = document.querySelector('a[data-md-component="logo"]');
+    if (!logo) return;
+    var homeHref = new URL(logo.getAttribute('href') || '.', location.href).href;
+    var homeBase = homeHref.replace(/#.*$/, '').replace(/\/+$/, '');
+    var here = location.href.replace(/#.*$/, '').replace(/\/+$/, '');
+
+    document.addEventListener('click', function (e) {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      var target = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+      if (!target) return;
+      var dest = target.href.replace(/#.*$/, '').replace(/\/+$/, '');
+      if (dest !== homeBase || here === homeBase) return;
+      if (!hasAnyProgress()) return;
+      e.preventDefault();
+      if (window.confirm('返回首页将清空所有训练分数与进度，确定继续吗？')) {
+        resetAll();
+        window.location.href = homeHref;
+      }
+    });
+  }
+
   function chooseOption(optionId) {
     var p = prog();
     var level = LEVELS[state.current];
@@ -706,7 +736,7 @@
         tierChip(s.grade) + '</div></li>';
     }).join('');
     var nextLabel = state.current < 3 ? '进入第 ' + (state.current + 1) + ' 关' : '查看训练总结';
-    var nextHref = state.current < 3 ? './level' + (state.current + 1) + '/' : './summary/';
+    var nextHref = state.current < 3 ? '../level' + (state.current + 1) + '/' : '../summary/';
 
     return '<div class="gdt-layout">' +
       '<aside class="gdt-stats">' + statsPanelHtml(steps.length, steps.length, false) + '</aside>' +
@@ -788,8 +818,8 @@
         '</div>' +
         (doneCards ? '<div class="gdt-summary-levels">' + doneCards + '</div>' : '') +
         '<div class="gdt-step-actions gdt-center-actions">' +
-        '<a class="gdt-btn gdt-btn-primary" href="./level' + firstMissing + '/">继续第 ' + firstMissing + ' 关</a>' +
-        '<a class="gdt-btn gdt-btn-ghost" href="./">返回首页</a>' +
+        '<a class="gdt-btn gdt-btn-primary" href="../level' + firstMissing + '/">继续第 ' + firstMissing + ' 关</a>' +
+        '<a class="gdt-btn gdt-btn-ghost" href="../">返回首页</a>' +
         '</div>';
     }
 
@@ -865,7 +895,7 @@
 
       '<div class="gdt-step-actions gdt-center-actions">' +
       '<button type="button" class="gdt-btn gdt-btn-primary" data-action="restart">重新开始训练</button>' +
-      '<a class="gdt-btn gdt-btn-ghost" href="./">返回首页</a>' +
+      '<a class="gdt-btn gdt-btn-ghost" href="../">返回首页</a>' +
       '</div>';
   }
 
@@ -922,7 +952,7 @@
       } else if (action === 'restart') {
         if (window.confirm('重新开始会清空所有关卡记录，确定吗？')) {
           resetAll();
-          window.location.href = './level1/';
+          window.location.href = '../level1/';
         }
       }
       e.preventDefault();
@@ -933,6 +963,8 @@
     var levelBox = document.getElementById('trainer');
     var summaryBox = document.getElementById('trainer-summary');
     var homeBox = document.getElementById('home-cards');
+
+    bindHomeGuard();
 
     if (levelBox) {
       var levelNum = Number(levelBox.getAttribute('data-level'));
